@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "rcm-angular-boilerplate": {
+    "toolbox-helpdesk-webapp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -24,9 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -56,10 +54,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rcm-angular-boilerplate:build:production"
+              "buildTarget": "toolbox-helpdesk-webapp:build:production"
             },
             "development": {
-              "buildTarget": "rcm-angular-boilerplate:build:development"
+              "buildTarget": "toolbox-helpdesk-webapp:build:development"
             }
           },
           "defaultConfiguration": "development"

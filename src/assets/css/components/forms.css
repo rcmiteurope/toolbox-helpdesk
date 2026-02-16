@@ -1,0 +1,173 @@
+@layer components {
+  /* Button Styles */
+  .btn {
+    @apply inline-block font-semibold text-center rounded-lg shadow-sm transition-colors duration-200 ease-in-out focus:outline-none;
+    @apply px-4 py-2 text-sm hover:cursor-pointer;
+  }
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  .btn-sm {
+    @apply px-3 py-1 text-xs;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary/90 focus:ring-primary/50;
+  }
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary/50 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+  }
+  .btn-success {
+    @apply bg-success text-white hover:bg-success/90 focus:ring-success/50;
+  }
+  .btn-danger {
+    @apply bg-error text-white hover:bg-error/90 focus:ring-error/50;
+  }
+  .btn-warning {
+    @apply bg-warning text-white hover:bg-warning/90 focus:ring-warning/50;
+  }
+  .btn-outline-primary {
+    @apply bg-transparent border border-primary text-primary hover:bg-primary hover:text-white dark:text-primary dark:border-primary dark:hover:bg-primary dark:hover:text-gray-900;
+  }
+
+  /* Form Styles */
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1;
+  }
+  .form-group {
+    @apply flex flex-col gap-1 mb-4;
+  }
+  .form-control,
+  .form-input,
+  .form-textarea,
+  .form-select {
+    @apply p-2 block w-full rounded-md border border-input-border bg-input-bg shadow-sm focus:border-primary focus:ring-primary sm:text-sm dark:border-gray-600 dark:placeholder-gray-400;
+  }
+  .form-checkbox,
+  .form-radio {
+    @apply h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary dark:bg-gray-700 dark:border-gray-600;
+  }
+
+  /* Floating Label Styles */
+  .relative-label {
+    @apply relative mb-4;
+  }
+  .relative-label input:placeholder-shown ~ label {
+    @apply top-2 left-3 scale-100 text-gray-400;
+  }
+  .relative-label input:focus ~ label,
+  .relative-label input:not(:placeholder-shown) ~ label {
+    @apply -top-2 left-2 scale-75 text-primary bg-input-bg px-1 dark:text-primary;
+  }
+  .relative-label label {
+    @apply absolute top-2 left-3 transition-all duration-200 pointer-events-none origin-left;
+  }
+  .relative-label input {
+    @apply p-2 pt-3 block w-full rounded-md border border-input-border bg-input-bg shadow-sm focus:border-primary focus:ring-primary sm:text-sm dark:border-gray-600 dark:placeholder-transparent;
+  }
+
+  /* Card Style */
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden dark:bg-gray-800;
+  }
+  .card-header {
+    @apply p-4 border-b border-gray-200 dark:border-gray-700;
+  }
+  .card-body {
+    @apply p-4;
+  }
+  .card-footer {
+    @apply p-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700;
+  }
+
+  /* Alert Styles */
+  .alert {
+    @apply p-4 mb-4 border rounded-lg;
+  }
+  .alert-info {
+    @apply bg-info/10 border-info/20 text-info dark:bg-info/20 dark:border-info/70 dark:text-info;
+  }
+  .alert-success {
+    @apply bg-success/10 border-success/20 text-success dark:bg-success/20 dark:border-success/70 dark:text-success;
+  }
+  .alert-warning {
+    @apply bg-warning/10 border-warning/20 text-warning dark:bg-warning/20 dark:border-warning/70 dark:text-warning;
+  }
+  .alert-danger {
+    @apply bg-error/10 border-error/20 text-error dark:bg-error/20 dark:border-error/70 dark:text-error;
+  }
+
+  .form-ng-select .ng-select-container {
+    @apply min-h-[38px] bg-input-bg border border-input-border rounded-md shadow-sm transition-all duration-200 dark:border-gray-600;
+  }
+
+  .form-ng-select .ng-value-container {
+    @apply flex items-center px-3 py-2;
+  }
+  .form-ng-select .ng-input {
+    padding-left: inherit;
+    padding-right: inherit;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .form-ng-select .ng-input > input {
+    @apply m-0 p-0 border-none ring-0;
+    outline: none;
+  }
+  .form-ng-select .ng-placeholder {
+    @apply px-0;
+    position: static;
+  }
+
+  .ng-select.ng-select-opened .ng-placeholder,
+  .ng-select .ng-has-value .ng-placeholder {
+    display: none !important;
+  }
+
+  .form-ng-select.ng-select-opened > .ng-select-container,
+  .form-ng-select.ng-focus > .ng-select-container {
+    @apply border-primary ring-1 ring-primary;
+  }
+  .form-ng-select .ng-dropdown-panel {
+    @apply bg-white border border-gray-200 rounded-md shadow-lg dark:bg-gray-800 dark:border-gray-700;
+  }
+
+  .form-ng-select .ng-dropdown-panel .ng-option {
+    @apply px-3 py-2 text-sm text-gray-700 dark:text-gray-300;
+  }
+
+  .form-ng-select .ng-dropdown-panel .ng-option-marked {
+    @apply bg-primary/5 text-primary dark:bg-primary/20 dark:text-primary;
+  }
+
+  .form-ng-select .ng-dropdown-panel .ng-option-selected {
+    @apply bg-primary/10 text-primary font-semibold dark:bg-primary/30 dark:text-primary;
+  }
+
+  .form-ng-select .ng-placeholder {
+    @apply text-gray-400;
+  }
+
+  .form-ng-select .ng-clear-wrapper {
+    @apply flex items-center px-2 text-gray-400 hover:text-error cursor-pointer;
+  }
+
+  .form-ng-select .ng-arrow-wrapper {
+    @apply flex items-center px-2;
+  }
+
+  .form-ng-select .ng-arrow-wrapper .ng-arrow {
+    @apply border-solid border-gray-500 hover:border-gray-700;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+    transition: all 0.2s;
+  }
+
+  .form-ng-select.ng-select-opened .ng-arrow-wrapper .ng-arrow {
+    transform: rotate(-135deg);
+    margin-bottom: -2px;
+  }
+}

@@ -1,0 +1,106 @@
+<div class="p-6">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-xl font-bold text-gray-900 dark:text-white">Add New Training User</h2>
+    <button (click)="dismiss()" class="text-gray-400 hover:text-gray-500 transition-colors">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <form [formGroup]="trainingForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input
+        type="text"
+        formControlName="name"
+        class="form-control"
+        placeholder="Enter user name"
+        [class.border-red-500]="
+          trainingForm.get('name')?.touched && trainingForm.get('name')?.invalid
+        "
+      />
+      @if (trainingForm.get('name')?.touched && trainingForm.get('name')?.invalid) {
+        <p class="text-xs text-red-500">Name is required (min 3 chars).</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Email Address</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="form-control"
+        placeholder="user@example.com"
+        [class.border-red-500]="
+          trainingForm.get('email')?.touched && trainingForm.get('email')?.invalid
+        "
+      />
+      @if (trainingForm.get('email')?.touched && trainingForm.get('email')?.invalid) {
+        <p class="text-xs text-red-500">Please enter a valid email.</p>
+      }
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Role</label>
+      <select formControlName="role" class="form-select">
+        <option value="Developer">Developer</option>
+        <option value="Designer">Designer</option>
+        <option value="Manager">Manager</option>
+      </select>
+    </div>
+
+    <div class="flex items-center gap-3 pt-4 border-t border-gray-100 dark:border-gray-800 mt-6">
+      <button
+        type="button"
+        (click)="dismiss()"
+        class="btn btn-secondary flex-1"
+        [disabled]="isSubmitting"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary flex-1 flex items-center justify-center gap-2"
+        [disabled]="trainingForm.invalid || isSubmitting"
+      >
+        @if (isSubmitting) {
+          <svg
+            class="animate-spin h-4 w-4 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Saving...
+        } @else {
+          Save User
+        }
+      </button>
+    </div>
+  </form>
+</div>
