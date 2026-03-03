@@ -1,13 +1,13 @@
 import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-import { ToastService } from '../services/toast/toast.service';
+import { ToastrService } from 'ngx-toastr';
 
 /**
  * Global error interceptor to catch HTTP errors and show toasts.
  */
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const toastService = inject(ToastService);
+  const toastrService = inject(ToastrService);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -22,7 +22,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           error.error?.message || `Error Code: ${error.status}\nMessage: ${error.message}`;
       }
 
-      toastService.error(errorMessage, 'Error');
+      toastrService.error(errorMessage, 'Error');
 
       return throwError(() => error);
     }),

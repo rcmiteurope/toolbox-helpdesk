@@ -290,24 +290,27 @@
           </h2>
           <div class="flex flex-wrap gap-4">
             <button
-              (click)="toastService.success('Task completed successfully!', 'Success')"
+              (click)="toastrService.success('Task completed successfully!', 'Success')"
               class="btn btn-success"
             >
               Success Toast
             </button>
             <button
-              (click)="toastService.error('Something went wrong.', 'Error')"
+              (click)="toastrService.error('Something went wrong.', 'Error')"
               class="btn btn-danger"
             >
               Error Toast
             </button>
             <button
-              (click)="toastService.warning('Please check your data.', 'Warning')"
+              (click)="toastrService.warning('Please check your data.', 'Warning')"
               class="btn btn-warning"
             >
               Warning Toast
             </button>
-            <button (click)="toastService.info('This is an info message.')" class="btn btn-primary">
+            <button
+              (click)="toastrService.info('This is an info message.')"
+              class="btn btn-primary"
+            >
               Info Toast
             </button>
           </div>

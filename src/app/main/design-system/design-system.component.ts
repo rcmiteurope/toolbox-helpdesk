@@ -15,7 +15,7 @@ import {
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { ToastService } from '../../_shared/services/toast/toast.service';
+import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../../_shared/services/modal/modal.service';
 import { LoadingService } from '../../_shared/services/loading/loading.service';
 import { CustomValidators } from '../../_shared/utils/validators';
@@ -33,7 +33,7 @@ import { finalize } from 'rxjs';
 export class DesignSystemComponent {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly http = inject(HttpClient);
-  protected readonly toastService = inject(ToastService);
+  protected readonly toastrService = inject(ToastrService);
   protected readonly modalService = inject(ModalService);
   protected readonly loadingService = inject(LoadingService);
 
@@ -78,12 +78,12 @@ export class DesignSystemComponent {
     this.loadingService.show();
 
     setTimeout(() => {
-      this.toastService.info('First parallel process finished');
+      this.toastrService.info('First parallel process finished');
       this.loadingService.hide();
     }, 1500);
 
     setTimeout(() => {
-      this.toastService.info('Second parallel process finished');
+      this.toastrService.info('Second parallel process finished');
       this.loadingService.hide();
     }, 3000);
   }
@@ -92,13 +92,13 @@ export class DesignSystemComponent {
     this.loadingService.show();
     setTimeout(() => {
       this.loadingService.hide();
-      this.toastService.info('Gap between requests...');
+      this.toastrService.info('Gap between requests...');
 
       setTimeout(() => {
         this.loadingService.show();
         setTimeout(() => {
           this.loadingService.hide();
-          this.toastService.success('Sequential sequence done');
+          this.toastrService.success('Sequential sequence done');
         }, 1500);
       }, 1000);
     }, 1500);
@@ -113,11 +113,11 @@ export class DesignSystemComponent {
     this.loadingService.show(key);
     this.loadingService.show(key);
     setTimeout(() => {
-      this.toastService.info(`${key}: First process done`);
+      this.toastrService.info(`${key}: First process done`);
       this.loadingService.hide(key);
     }, 1500);
     setTimeout(() => {
-      this.toastService.info(`${key}: Second process done`);
+      this.toastrService.info(`${key}: Second process done`);
       this.loadingService.hide(key);
     }, 3000);
   }

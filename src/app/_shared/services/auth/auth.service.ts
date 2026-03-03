@@ -1,22 +1,30 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, inject, computed, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly AUTH_KEY = 'isLoggedIn';
+  private readonly oidcSecurityService = inject(OidcSecurityService);
+  private readonly router = inject(Router);
+  public userData = toSignal(this.oidcSecurityService.getUserData());
 
-  private _isLoggedIn = signal<boolean>(localStorage.getItem(this.AUTH_KEY) === 'true');
+  private readonly authState = toSignal(
+    this.oidcSecurityService.isAuthenticated$.pipe(map((result) => result.isAuthenticated)),
+    { initialValue: false },
+  );
 
-  readonly isLoggedIn = computed(() => this._isLoggedIn());
+  readonly isLoggedIn = computed(() => this.authState());
 
   login() {
-    localStorage.setItem(this.AUTH_KEY, 'true');
-    this._isLoggedIn.set(true);
+    this.oidcSecurityService.authorize();
   }
 
   logout() {
-    localStorage.removeItem(this.AUTH_KEY);
-    this._isLoggedIn.set(false);
+    this.oidcSecurityService.logoffLocal();
+    this.router.navigate(['/auth']);
   }
 }

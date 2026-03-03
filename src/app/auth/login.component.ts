@@ -1,21 +1,12 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from '../_shared/services/auth/auth.service';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgOptimizedImage],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
-
-  login() {
-    this.authService.login();
-    this.router.navigate(['/main']);
-  }
-}
+export class LoginComponent {}
