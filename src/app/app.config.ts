@@ -37,7 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideAnimations(),
     provideToastr({
-      timeOut: 20000,
+      timeOut: 5000,
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressBar: true,

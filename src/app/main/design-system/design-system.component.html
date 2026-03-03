@@ -315,6 +315,62 @@
             </button>
           </div>
 
+          <div class="mt-8">
+            <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
+              Toast Positions
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <button
+                (click)="showToastAtPosition('toast-top-right')"
+                class="btn btn-outline text-nowrap"
+              >
+                Top Right
+              </button>
+              <button
+                (click)="showToastAtPosition('toast-top-left')"
+                class="btn btn-outline text-nowrap"
+              >
+                Top Left
+              </button>
+              <button
+                (click)="showToastAtPosition('toast-bottom-right')"
+                class="btn btn-outline text-nowrap"
+              >
+                Bottom Right
+              </button>
+              <button
+                (click)="showToastAtPosition('toast-bottom-left')"
+                class="btn btn-outline text-nowrap"
+              >
+                Bottom Left
+              </button>
+              <button
+                (click)="showToastAtPosition('toast-top-center')"
+                class="btn btn-outline text-nowrap"
+              >
+                Top Center
+              </button>
+              <button
+                (click)="showToastAtPosition('toast-bottom-center')"
+                class="btn btn-outline text-nowrap"
+              >
+                Bottom Center
+              </button>
+              <button
+                (click)="showToastAtPosition('toast-top-full-width')"
+                class="btn btn-outline text-nowrap"
+              >
+                Top Full Width
+              </button>
+              <button
+                (click)="showToastAtPosition('toast-bottom-full-width')"
+                class="btn btn-outline text-nowrap"
+              >
+                Bottom Full Width
+              </button>
+            </div>
+          </div>
+
           <div class="mt-8 space-y-4">
             <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">
               API & Loading State

@@ -2,6 +2,32 @@
 @import 'ngx-toastr/toastr';
 @import './assets/css/main.css';
 
+/* ngx-toastr overrides to match project brand colors */
+.ngx-toastr {
+  @apply rounded-lg shadow-lg border-l-4;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.toast-success {
+  background-color: var(--color-success) !important;
+  border-left-color: #065f46 !important;
+}
+
+.toast-error {
+  background-color: var(--color-error) !important;
+  border-left-color: #991b1b !important;
+}
+
+.toast-info {
+  background-color: var(--color-info) !important;
+  border-left-color: #1e3a8a !important;
+}
+
+.toast-warning {
+  background-color: var(--color-warning) !important;
+  border-left-color: #92400e !important;
+}
+
 .input:focus {
   outline: 0;
 }

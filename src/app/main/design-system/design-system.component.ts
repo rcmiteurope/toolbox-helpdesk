@@ -148,4 +148,10 @@ export class DesignSystemComponent {
       data: { position: position.charAt(0).toUpperCase() + position.slice(1) },
     });
   }
+
+  showToastAtPosition(position: string) {
+    this.toastrService.info(`Toast shown at ${position}`, 'Position Demo', {
+      positionClass: position,
+    });
+  }
 }
