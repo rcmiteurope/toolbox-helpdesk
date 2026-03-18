@@ -1,0 +1,59 @@
+ <!-- Ticket Creation Form Section -->
+      <div class="card glass">
+        <button (click)="dismiss()" class="text-gray-400 hover:text-gray-500 transition-colors">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M18 6 6 18" />
+        <path d="m6 6 12 12" />
+      </svg>
+    </button>
+        <header class="card-header">
+          <h2>Create New Ticket</h2>
+        </header>
+        <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" type="text" formControlName="title" placeholder="What's the issue?">
+            @if (ticketForm.get('title')?.touched && ticketForm.get('title')?.invalid) {
+              <small class="error">Title is required (min 5 characters).</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" formControlName="description" rows="3" placeholder="Describe the problem in detail..."></textarea>
+            @if (ticketForm.get('description')?.touched && ticketForm.get('description')?.invalid) {
+              <small class="error">Description is required.</small>
+            }
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="priority">Priority</label>
+              <select id="priority" formControlName="priority">
+                @for (p of priorities; track p) {
+                  <option [value]="p">{{ p }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="category">Category</label>
+              <input id="category" type="text" formControlName="category">
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="ticketForm.invalid" class="btn-primary">
+            Create Ticket
+          </button>
+        </form>
+      </div>

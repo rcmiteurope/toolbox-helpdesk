@@ -48,7 +48,7 @@ export class TrainingFormModalComponent {
         }),
       )
       .subscribe((newUser) => {
-        this.userSaved.emit(newUser);
+       this.userSaved.emit(newUser);
         this.activeModal.close(newUser);
       });
   }

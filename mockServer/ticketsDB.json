@@ -1,0 +1,64 @@
+{
+  "tickets": [
+    {
+      "id": "1",
+      "title": "Login page crashing on mobile",
+      "description": "User reported that the app crashes when orienation changes on login screen.",
+      "status": "Open",
+      "priority": "Urgent",
+      "category": "Bug",
+      "createdAt": "2026-03-01T10:00:00Z",
+      "createdBy": "John Doe"
+    },
+    {
+      "id": "2",
+      "title": "New feature request: Dark Mode",
+      "description": "Users are asking for a dark mode option in settings.",
+      "status": "In Progress",
+      "priority": "Medium",
+      "category": "Feature",
+      "createdAt": "2026-03-02T09:30:00Z",
+      "createdBy": "Jane Smith"
+    },
+    {
+      "id": "659",
+      "title": "Test Ticket",
+      "description": "Test Ticket",
+      "priority": "High",
+      "category": "General",
+      "status": "Open",
+      "createdAt": "2026-03-02T12:04:54.673Z",
+      "createdBy": "Admin"
+    },
+    {
+      "id": "3",
+      "title": "dasda",
+      "description": "sdasd",
+      "priority": "Medium",
+      "category": "General",
+      "status": "Open",
+      "createdAt": "2026-03-02T12:08:32.269Z",
+      "createdBy": "Admin"
+    },
+    {
+      "id": "806",
+      "title": "test 5",
+      "description": "test 546557",
+      "priority": "Medium",
+      "category": "General",
+      "status": "Open",
+      "createdAt": "2026-03-03T00:32:53.610Z",
+      "createdBy": "Admin"
+    },
+    {
+      "id": "695",
+      "title": "fgsfdafs",
+      "description": "fdsfgsfds",
+      "priority": "Medium",
+      "category": "General",
+      "status": "Open",
+      "createdAt": "2026-03-03T00:52:10.201Z",
+      "createdBy": "Admin"
+    }
+  ]
+}

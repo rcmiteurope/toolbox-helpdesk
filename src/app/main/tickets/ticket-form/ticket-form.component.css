@@ -15,11 +15,9 @@
   --urgent: #ef4444;
 
   display: block;
-  min-height: 100vh;
-  background: var(--bg-gradient);
+  min-width: 30vw;
   color: var(--text-main);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  padding: 2rem;
 }
 
 .tickets-container {
