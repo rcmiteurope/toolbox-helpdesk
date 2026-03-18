@@ -1,19 +1,32 @@
 import { Routes } from '@angular/router';
-import { DesignSystemComponent } from './design-system/design-system.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'design-system', pathMatch: 'full' },
-  { path: 'design-system', component: DesignSystemComponent },
+  { path: '', redirectTo: 'tickets', pathMatch: 'full' },
   {
-    path: 'training',
-    loadComponent: () => import('./training/training.component').then((m) => m.TrainingComponent),
-  },
-  {
-    path: 'exercise',
-    loadComponent: () => import('./exercise/exercise.component').then((m) => m.ExerciseComponent),
+    path: 'overview',
+    loadComponent: () =>
+      import('./overview/overview.component').then((m) => m.OverviewComponent),
   },
   {
     path: 'tickets',
-    loadComponent: () => import('./tickets/tickets.component').then((m) => m.TicketsComponent),
+    loadComponent: () =>
+      import('./tickets/tickets.component').then((m) => m.TicketsComponent),
+  },
+  {
+    path: 'tickets/:id',
+    loadComponent: () =>
+      import('./tickets/ticket-detail/ticket-detail.component').then(
+        (m) => m.TicketDetailComponent
+      ),
+  },
+  {
+    path: 'approval',
+    loadComponent: () =>
+      import('./approval/approval.component').then((m) => m.ApprovalComponent),
+  },
+  {
+    path: 'analytics',
+    loadComponent: () =>
+      import('./analytics/analytics.component').then((m) => m.AnalyticsComponent),
   },
 ];

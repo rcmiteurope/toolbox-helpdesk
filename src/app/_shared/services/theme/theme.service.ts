@@ -29,7 +29,7 @@ export class ThemeService {
     const savedTheme = localStorage.getItem(this.STORAGE_KEY) as Theme;
     if (savedTheme) return savedTheme;
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    return 'light';
   }
 
   private applyTheme(theme: Theme): void {

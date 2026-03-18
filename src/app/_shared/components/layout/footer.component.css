@@ -1,0 +1,52 @@
+.app-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9ca3af;
+}
+
+.footer-left {
+  color: #9ca3af;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.version {
+  color: #9ca3af;
+}
+
+/* Dark mode */
+:host-context(.dark) .app-footer {
+  background: #111827;
+  border-top-color: #1f2937;
+}
+
+:host-context(.dark) .footer-left,
+:host-context(.dark) .footer-right,
+:host-context(.dark) .version {
+  color: #6b7280;
+}

@@ -1,64 +1,319 @@
 {
   "tickets": [
     {
-      "id": "1",
-      "title": "Login page crashing on mobile",
-      "description": "User reported that the app crashes when orienation changes on login screen.",
+      "id": "1001",
+      "ticketNumber": "TK-1001",
+      "title": "VPN Access Intermittent Failure",
+      "description": "User cannot connect to US-EAST-1 VPN gateway. Connection drops after approximately 15 minutes of stable use. This issue started after the latest firmware update on the VPN concentrator.",
+      "status": "Open",
+      "priority": "High",
+      "category": "Technical Issue",
+      "createdAt": "2026-03-18T08:00:00Z",
+      "createdBy": "John Doe",
+      "assignedTo": "Alex Rivers",
+      "customer": {
+        "name": "John Doe",
+        "email": "john.doe@company.com",
+        "role": "Software Engineer",
+        "avatar": null
+      },
+      "collaborators": ["Sarah Jenkins", "Mike Chen"],
+      "timeLogged": 45,
+      "tags": ["IT Support"]
+    },
+    {
+      "id": "1002",
+      "ticketNumber": "TK-1002",
+      "title": "Macbook Battery Swelling",
+      "description": "Urgent replacement required for hardware. The battery on MacBook Pro 2024 model is visibly swollen and the trackpad is no longer clicking properly.",
+      "status": "Open",
+      "priority": "Normal",
+      "category": "Hardware",
+      "createdAt": "2026-03-18T07:00:00Z",
+      "createdBy": "Jane Smith",
+      "assignedTo": "Tech Support Team",
+      "customer": {
+        "name": "Jane Smith",
+        "email": "jane.smith@company.com",
+        "role": "Product Manager",
+        "avatar": null
+      },
+      "collaborators": [],
+      "timeLogged": 20,
+      "tags": ["HR Desk"]
+    },
+    {
+      "id": "4092",
+      "ticketNumber": "TKT-4092",
+      "title": "Server Latency Issues - US East Cluster",
+      "description": "We are experiencing significant latency on our US-East-1 production cluster. API response times have spiked from 150ms to over 2s in the last 20 minutes.",
+      "status": "In Progress",
+      "priority": "High",
+      "category": "Infrastructure",
+      "createdAt": "2026-03-18T06:00:00Z",
+      "createdBy": "Alex Smith",
+      "assignedTo": "Sarah Jenkins",
+      "customer": {
+        "name": "Alex Smith",
+        "email": "alex.smith@company.com",
+        "role": "Software Engineer",
+        "avatar": null
+      },
+      "collaborators": ["David Chen", "Sarah Jenkins"],
+      "timeLogged": 120,
+      "tags": ["IT Support"]
+    },
+    {
+      "id": "1003",
+      "ticketNumber": "TK-1003",
+      "title": "Email Service Outage",
+      "description": "Multiple users reporting inability to send or receive emails. Exchange server appears to be unresponsive.",
       "status": "Open",
       "priority": "Urgent",
-      "category": "Bug",
-      "createdAt": "2026-03-01T10:00:00Z",
-      "createdBy": "John Doe"
+      "category": "Infrastructure",
+      "createdAt": "2026-03-18T05:30:00Z",
+      "createdBy": "Mike Chen",
+      "assignedTo": null,
+      "customer": {
+        "name": "Mike Chen",
+        "email": "mike.chen@company.com",
+        "role": "DevOps Engineer",
+        "avatar": null
+      },
+      "collaborators": [],
+      "timeLogged": 0,
+      "tags": ["IT Support"]
     },
     {
-      "id": "2",
-      "title": "New feature request: Dark Mode",
-      "description": "Users are asking for a dark mode option in settings.",
+      "id": "1004",
+      "ticketNumber": "TK-1004",
+      "title": "New Employee Onboarding - Access Setup",
+      "description": "Need to set up all required system accesses for new hire starting Monday. Includes AD account, email, VPN, and application access.",
       "status": "In Progress",
       "priority": "Medium",
-      "category": "Feature",
-      "createdAt": "2026-03-02T09:30:00Z",
-      "createdBy": "Jane Smith"
+      "category": "Access Management",
+      "createdAt": "2026-03-17T14:00:00Z",
+      "createdBy": "HR Department",
+      "assignedTo": "Alex Rivers",
+      "customer": {
+        "name": "HR Department",
+        "email": "hr@company.com",
+        "role": "Human Resources",
+        "avatar": null
+      },
+      "collaborators": [],
+      "timeLogged": 30,
+      "tags": ["HR Desk"]
     },
     {
-      "id": "659",
-      "title": "Test Ticket",
-      "description": "Test Ticket",
-      "priority": "High",
-      "category": "General",
-      "status": "Open",
-      "createdAt": "2026-03-02T12:04:54.673Z",
-      "createdBy": "Admin"
-    },
-    {
-      "id": "3",
-      "title": "dasda",
-      "description": "sdasd",
-      "priority": "Medium",
-      "category": "General",
-      "status": "Open",
-      "createdAt": "2026-03-02T12:08:32.269Z",
-      "createdBy": "Admin"
-    },
-    {
-      "id": "806",
-      "title": "test 5",
-      "description": "test 546557",
-      "priority": "Medium",
-      "category": "General",
-      "status": "Open",
-      "createdAt": "2026-03-03T00:32:53.610Z",
-      "createdBy": "Admin"
-    },
-    {
-      "id": "695",
-      "title": "fgsfdafs",
-      "description": "fdsfgsfds",
-      "priority": "Medium",
-      "category": "General",
-      "status": "Open",
-      "createdAt": "2026-03-03T00:52:10.201Z",
-      "createdBy": "Admin"
+      "id": "1005",
+      "ticketNumber": "TK-1005",
+      "title": "Printer Not Responding - 3rd Floor",
+      "description": "The network printer on the 3rd floor is not responding to print jobs. Already tried power cycling.",
+      "status": "Resolved",
+      "priority": "Low",
+      "category": "Hardware",
+      "createdAt": "2026-03-17T09:00:00Z",
+      "createdBy": "Lisa Wang",
+      "assignedTo": "Tech Support Team",
+      "customer": {
+        "name": "Lisa Wang",
+        "email": "lisa.wang@company.com",
+        "role": "Accountant",
+        "avatar": null
+      },
+      "collaborators": [],
+      "timeLogged": 15,
+      "tags": ["Logistics"]
     }
-  ]
+  ],
+  "discussions": [
+    {
+      "id": "d1",
+      "ticketId": "4092",
+      "author": "Alex Smith",
+      "authorRole": "Software Engineer",
+      "message": "Hello, we are experiencing significant latency on our US-East-1 production cluster. API response times have spiked from 150ms to over 2s in the last 20 minutes. Can you please investigate?",
+      "visibility": "public",
+      "createdAt": "2026-03-18T10:00:00Z"
+    },
+    {
+      "id": "d2",
+      "ticketId": "4092",
+      "author": "Sarah Jenkins",
+      "authorRole": "SRE Engineer",
+      "message": "System diagnostics show US-East-1 db-instance-04 is throttled. Checking connection pool limits. Looks like a possible leak in the recent deployment.",
+      "visibility": "internal",
+      "createdAt": "2026-03-18T10:45:00Z"
+    },
+    {
+      "id": "d3",
+      "ticketId": "4092",
+      "author": "Sarah Jenkins",
+      "authorRole": "SRE Engineer",
+      "message": "Hi Alex, I'm currently looking into this. I see the latency spike in our monitoring tools. It appears to be related to a database connection pool saturation. I am working on scaling the resources now and will update you shortly.",
+      "visibility": "public",
+      "createdAt": "2026-03-18T11:45:00Z"
+    },
+    {
+      "id": "d4",
+      "ticketId": "1001",
+      "author": "John Doe",
+      "authorRole": "Software Engineer",
+      "message": "Hi support team, I'm having trouble logging in to the mobile app since the last update. It keeps saying \"Invalid Credentials\" even though they work fine on the desktop.",
+      "visibility": "public",
+      "createdAt": "2026-03-18T08:00:00Z"
+    }
+  ],
+  "subtasks": [
+    {
+      "id": "st1",
+      "ticketId": "4092",
+      "title": "Increase Connection Pool Size",
+      "assignee": "Sarah Jenkins",
+      "status": "In Progress",
+      "timer": "01:24:12",
+      "createdAt": "2026-03-18T11:00:00Z",
+      "steps": []
+    },
+    {
+      "id": "st2",
+      "ticketId": "4092",
+      "title": "Database Connection Leak Investigation",
+      "assignee": "David Chen",
+      "status": "Investigating",
+      "timer": null,
+      "realTimeActive": true,
+      "createdAt": "2026-03-18T12:00:00Z",
+      "steps": [
+        {
+          "id": "step1",
+          "description": "Isolated US-East-1a traffic nodes",
+          "completedAt": "2026-03-18T12:45:00Z",
+          "status": "completed"
+        },
+        {
+          "id": "step2",
+          "description": "Captured heap dump from node instance-402",
+          "completedAt": "2026-03-18T13:10:00Z",
+          "status": "completed"
+        },
+        {
+          "id": "step3",
+          "description": "Analyzing connection lifecycle in middleware",
+          "completedAt": null,
+          "status": "in-progress"
+        }
+      ]
+    },
+    {
+      "id": "st3",
+      "ticketId": "4092",
+      "title": "Deploy Connection Leak Patch",
+      "assignee": "Alex Smith",
+      "status": "Done",
+      "timer": null,
+      "createdAt": "2026-03-18T13:00:00Z",
+      "steps": []
+    }
+  ],
+  "activityTimeline": [
+    {
+      "id": "at1",
+      "ticketId": "4092",
+      "type": "created",
+      "description": "Ticket Created",
+      "detail": "Monitoring Alert: Zabbix",
+      "createdAt": "2026-03-18T10:00:00Z",
+      "icon": "plus"
+    },
+    {
+      "id": "at2",
+      "ticketId": "4092",
+      "type": "assigned",
+      "description": "Assigned to SRE Team",
+      "detail": "Auto-assigned: Infrastructure",
+      "createdAt": "2026-03-18T10:15:00Z",
+      "icon": "users"
+    },
+    {
+      "id": "at3",
+      "ticketId": "4092",
+      "type": "escalated",
+      "description": "Priority Escalated",
+      "detail": "Changed to 'High' by D. Chen",
+      "createdAt": "2026-03-18T10:45:00Z",
+      "icon": "exclamation"
+    },
+    {
+      "id": "at4",
+      "ticketId": "4092",
+      "type": "status-change",
+      "description": "Status: In Progress",
+      "detail": "Investigating by S. Jenkins",
+      "createdAt": "2026-03-18T11:30:00Z",
+      "icon": "refresh"
+    },
+    {
+      "id": "at5",
+      "ticketId": "4092",
+      "type": "attachment",
+      "description": "Logs Attached",
+      "detail": "log_dump_4092.json",
+      "createdAt": "2026-03-18T13:20:00Z",
+      "icon": "paperclip"
+    }
+  ],
+  "users": [
+    {
+      "id": "u1",
+      "name": "John Doe",
+      "email": "john.doe@company.com",
+      "role": "Software Engineer",
+      "avatar": null
+    },
+    {
+      "id": "u2",
+      "name": "Jane Smith",
+      "email": "jane.smith@company.com",
+      "role": "Product Manager",
+      "avatar": null
+    },
+    {
+      "id": "u3",
+      "name": "Alex Smith",
+      "email": "alex.smith@company.com",
+      "role": "Software Engineer",
+      "avatar": null
+    },
+    {
+      "id": "u4",
+      "name": "Sarah Jenkins",
+      "email": "sarah.jenkins@company.com",
+      "role": "SRE Engineer",
+      "avatar": null
+    },
+    {
+      "id": "u5",
+      "name": "David Chen",
+      "email": "david.chen@company.com",
+      "role": "DevOps Engineer",
+      "avatar": null
+    },
+    {
+      "id": "u6",
+      "name": "Alex Rivers",
+      "email": "alex.rivers@company.com",
+      "role": "IT Support Lead",
+      "avatar": null
+    }
+  ],
+  "stats": {
+    "openTickets": 124,
+    "openTicketsChange": 12,
+    "pendingApprovals": 18,
+    "pendingApprovalsChange": -5,
+    "avgResolutionTime": "2h 45m",
+    "avgResolutionChange": 10
+  }
 }

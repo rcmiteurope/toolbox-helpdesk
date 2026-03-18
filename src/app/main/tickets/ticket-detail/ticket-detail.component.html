@@ -1,0 +1,92 @@
+<div class="page-container">
+  <div class="page-header">
+    <div class="header-left">
+      <button class="back-btn" (click)="goBack()" aria-label="Go back">
+        <i class="pi pi-arrow-left"></i>
+        <span>Back to Tickets</span>
+      </button>
+      
+      @if (ticket(); as t) {
+        <div class="ticket-title-row">
+          <span class="ticket-number">{{ t.ticketNumber }}</span>
+          <app-status-badge [status]="t.status" />
+          <app-priority-badge [priority]="t.priority" />
+        </div>
+        <h1 class="ticket-title">{{ t.title }}</h1>
+      } @else {
+        <h1 class="ticket-title">Loading...</h1>
+      }
+    </div>
+    <div class="header-right">
+      <p-button label="Edit Ticket" icon="pi pi-pencil" styleClass="p-button-outlined p-button-secondary" />
+      <p-button label="Resolve Ticket" icon="pi pi-check" styleClass="p-button-success" />
+    </div>
+  </div>
+
+  @if (ticket(); as t) {
+    <div class="content-layout">
+      <!-- Left Sidebar: Activity Timeline -->
+      <aside class="left-sidebar">
+        <h3 class="sidebar-title">ACTIVITY TIMELINE</h3>
+        <app-activity-timeline [events]="timelineEvents()" />
+      </aside>
+
+      <!-- Center Content: Tabs -->
+      <main class="center-content">
+        <p-tabs [value]="activeTab()" (valueChange)="activeTab.set($event?.toString() || '0')">
+          <p-tablist>
+            <p-tab value="0">Discussions</p-tab>
+            <p-tab value="1">Tasks</p-tab>
+            <p-tab value="2">Resolution</p-tab>
+          </p-tablist>
+          
+          <p-tabpanels>
+            <!-- Discussions Tab -->
+            <p-tabpanel value="0">
+              <app-discussion-tab 
+                [discussions]="discussions()" 
+                (replySent)="onReplySent($event)" 
+              />
+            </p-tabpanel>
+            
+            <!-- Tasks Tab -->
+            <p-tabpanel value="1">
+              <app-task-tab 
+                [subtasks]="subtasks()" 
+                (stepToggled)="onStepToggled($event)" 
+              />
+            </p-tabpanel>
+            
+            <!-- Resolution Tab -->
+            <p-tabpanel value="2">
+              <app-resolution-tab 
+                [resolved]="t.status === 'Resolved' || t.status === 'Closed'"
+                resolutionDate="Oct 24, 2026"
+                finalNotes="Checked server logs and restarted the failing container. No further issues detected."
+                (resolveTicket)="onResolveTicket($event)"
+                (reopenTicket)="onReopenTicket()"
+              />
+            </p-tabpanel>
+          </p-tabpanels>
+        </p-tabs>
+      </main>
+
+      <!-- Right Sidebar: Details & Quick Tools -->
+      <aside class="right-sidebar">
+        <app-customer-details-panel [customer]="t.customer" />
+        
+        <div class="sidebar-divider"></div>
+        
+        <app-quick-tools-grid [tools]="quickTools" />
+        
+        <div class="sidebar-divider"></div>
+        
+        <h3 class="sidebar-title">SLA TRACKING</h3>
+        <div class="sla-list">
+          <app-sla-indicator label="FIRST RESPONSE" value="1h 24m" [progress]="100" [met]="true" />
+          <app-sla-indicator label="RESOLUTION TIME" value="2d 4h remaining" [progress]="45" [met]="false" />
+        </div>
+      </aside>
+    </div>
+  }
+</div>
