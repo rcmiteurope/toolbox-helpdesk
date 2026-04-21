@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './auth/login.component';
 import { MainShellComponent } from './_shared/components/layout/main-shell.component';
-import { authGuard } from './_shared/guards/auth.guard';
+import { autoLoginPartialRoutesGuard } from 'angular-auth-oidc-client';
+import { AuthCallbackComponent } from './auth/auth-callback.component';
 
 export const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'auth', component: LoginComponent },
+  { path: 'auth', component: AuthCallbackComponent },
+  { path: 'login', redirectTo: 'auth', pathMatch: 'full' },
   {
     path: 'main',
     component: MainShellComponent,
-    canActivate: [authGuard],
+    canActivate: [autoLoginPartialRoutesGuard],
     loadChildren: () => import('./main/main.routes').then((m) => m.routes),
   },
   { path: '', redirectTo: 'main', pathMatch: 'full' },

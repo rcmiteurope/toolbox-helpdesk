@@ -7,46 +7,29 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  NonNullableFormBuilder,
-  Validators,
-} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../../_shared/services/modal/modal.service';
 import { LoadingService } from '../../_shared/services/loading/loading.service';
-import { CustomValidators } from '../../_shared/utils/validators';
+
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-design-system',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule],
+  imports: [CommonModule, FormsModule, NgSelectModule],
   templateUrl: './design-system.component.html',
   styleUrls: ['./design-system.component.css'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DesignSystemComponent {
-  private readonly fb = inject(NonNullableFormBuilder);
   private readonly http = inject(HttpClient);
   protected readonly toastrService = inject(ToastrService);
   protected readonly modalService = inject(ModalService);
   protected readonly loadingService = inject(LoadingService);
-
-  readonly registrationForm = this.fb.group(
-    {
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, CustomValidators.passwordComplexity()]],
-      confirmPassword: ['', [Validators.required]],
-    },
-    {
-      validators: [CustomValidators.match('password', 'confirmPassword')],
-    },
-  );
 
   selectedTab = signal<string>('buttons');
 
