@@ -1,113 +1,133 @@
 <main class="tickets-page">
+  <!-- Service Catalog -->
+  <div class="mb-8">
+    <h2 class="text-xs font-bold tracking-wider text-gray-900 dark:text-white uppercase mb-1">SERVICE CATALOG</h2>
+    <p class="text-sm text-gray-500 mb-4">Select a service</p>
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+        <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">desktop_windows</span>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Hardware Related Issues</span>
+      </div>
+      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+        <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">image</span>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Software Related Issues</span>
+      </div>
+      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+        <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">refresh</span>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Password Reset</span>
+      </div>
+      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+        <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">mail</span>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Report Suspicious Email</span>
+      </div>
+      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+        <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">description</span>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">EARF Submission</span>
+      </div>
+    </div>
+  </div>
+
   <!-- Stat Cards Row -->
-  <div class="stats-row">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
     @if (stats(); as s) {
-      <app-stat-card
-        label="Open Tickets"
-        [value]="s.openTickets"
-        [change]="s.openTicketsChange"
-        iconClass="pi pi-envelope"
-      />
-      <app-stat-card
-        label="Pending Approvals"
-        [value]="s.pendingApprovals"
-        [change]="s.pendingApprovalsChange"
-        iconClass="pi pi-check-circle"
-      />
-      <app-stat-card
-        label="Avg. Resolution"
-        [value]="s.avgResolutionTime"
-        [change]="s.avgResolutionChange"
-        iconClass="pi pi-clock"
-      />
+      <app-stat-card label="Open Tickets" [value]="s.openTickets" [change]="s.openTicketsChange" changeType="success" iconClass="mail" />
+      <app-stat-card label="Pending Approvals" [value]="s.pendingApprovals" [change]="s.pendingApprovalsChange" changeType="neutral" iconClass="verified_user" />
+      <app-stat-card label="Avg. Resolution" [value]="s.avgResolutionTime" [change]="s.avgResolutionChange" changeType="danger" iconClass="timer" />
     } @else {
       @for (i of [1, 2, 3]; track i) {
-        <div class="stat-skeleton">
-          <p-skeleton width="100%" height="100px" borderRadius="12px" />
-        </div>
+        <p-skeleton width="100%" height="100px" borderRadius="12px" />
       }
     }
   </div>
 
   <!-- Three Column Layout -->
-  <div class="tickets-layout">
-    <!-- Left: Filters Sidebar -->
-    <aside class="filters-sidebar">
-      <p-button
-        label="CREATE TICKET"
-        icon="pi pi-plus"
-        (onClick)="openCreateTicketModal()"
-        styleClass="create-ticket-btn"
-        [style]="{ width: '100%' }"
-      />
-
-      <div class="filter-section">
-        <h3 class="filter-title">FILTERS</h3>
-        <ul class="filter-list" role="listbox" aria-label="Ticket filters">
-          <li
-            class="filter-item"
-            [class.active]="activeFilter() === 'all'"
-            (click)="setFilter('all')"
-            (keydown.enter)="setFilter('all')"
-            role="option"
-            [attr.aria-selected]="activeFilter() === 'all'"
-            tabindex="0"
-          >
-            <i class="pi pi-inbox"></i>
-            <span>All Tickets</span>
-            <span class="filter-count">{{ filterCounts().all }}</span>
-          </li>
-          <li
-            class="filter-item"
-            [class.active]="activeFilter() === 'assigned'"
-            (click)="setFilter('assigned')"
-            (keydown.enter)="setFilter('assigned')"
-            role="option"
-            [attr.aria-selected]="activeFilter() === 'assigned'"
-            tabindex="0"
-          >
-            <i class="pi pi-user"></i>
-            <span>Assigned</span>
-            <span class="filter-count">{{ filterCounts().assigned }}</span>
-          </li>
-          <li
-            class="filter-item"
-            [class.active]="activeFilter() === 'urgent'"
-            (click)="setFilter('urgent')"
-            (keydown.enter)="setFilter('urgent')"
-            role="option"
-            [attr.aria-selected]="activeFilter() === 'urgent'"
-            tabindex="0"
-          >
-            <i class="pi pi-bolt"></i>
-            <span>Urgent</span>
-            <span class="filter-count urgent">{{ filterCounts().urgent }}</span>
-          </li>
-          <li
-            class="filter-item"
-            [class.active]="activeFilter() === 'closed'"
-            (click)="setFilter('closed')"
-            (keydown.enter)="setFilter('closed')"
-            role="option"
-            [attr.aria-selected]="activeFilter() === 'closed'"
-            tabindex="0"
-          >
-            <i class="pi pi-check-circle"></i>
-            <span>Closed</span>
-          </li>
-        </ul>
+  <div class="flex gap-6 h-[800px]">
+    <!-- Left: Incident/Request Sidebar -->
+    <aside class="w-64 shrink-0 flex flex-col gap-6 overflow-y-auto pr-2">
+      <!-- Incident Group -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+        <button (click)="toggleIncident()" class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-400 text-lg">error_outline</span>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200">INCIDENT</span>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200" [class.-rotate-180]="incidentExpanded()">expand_more</span>
+        </button>
+        
+        @if (incidentExpanded()) {
+          <div class="px-2 pb-2 space-y-1">
+            <a routerLink="/main/tickets/new" class="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors">
+              <span class="material-symbols-outlined text-lg">add</span>
+              Create New
+            </a>
+            
+            <button (click)="setFilter('all')" [class.bg-slate-50]="activeFilter() === 'all'" [class.font-semibold]="activeFilter() === 'all'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">book</span> All Tickets</div>
+              <span class="text-xs text-gray-400">{{ filterCounts().all }}</span>
+            </button>
+            <button (click)="setFilter('assigned')" [class.bg-slate-50]="activeFilter() === 'assigned'" [class.font-semibold]="activeFilter() === 'assigned'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">person</span> Assigned</div>
+              <span class="text-xs text-gray-400">{{ filterCounts().assigned }}</span>
+            </button>
+            <button (click)="setFilter('assigned-to-me')" [class.bg-slate-50]="activeFilter() === 'assigned-to-me'" [class.font-semibold]="activeFilter() === 'assigned-to-me'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">person_edit</span> Assigned to me</div>
+              <span class="text-xs text-gray-400">{{ filterCounts().assignedToMe }}</span>
+            </button>
+            <button (click)="setFilter('urgent')" [class.bg-slate-50]="activeFilter() === 'urgent'" [class.font-semibold]="activeFilter() === 'urgent'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">bolt</span> Urgent</div>
+              <span class="text-xs text-red-500 font-medium">{{ filterCounts().urgent }}</span>
+            </button>
+            <button (click)="setFilter('in-progress')" [class.bg-slate-50]="activeFilter() === 'in-progress'" [class.font-semibold]="activeFilter() === 'in-progress'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">progress_activity</span> In Progress</div>
+              <span class="text-xs text-gray-400">{{ filterCounts().inProgress }}</span>
+            </button>
+            <button (click)="setFilter('closed')" [class.bg-slate-50]="activeFilter() === 'closed'" [class.font-semibold]="activeFilter() === 'closed'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">cancel</span> Closed</div>
+              <span class="text-xs text-gray-400">{{ filterCounts().closed }}</span>
+            </button>
+            <button (click)="setFilter('for-approval')" [class.bg-slate-50]="activeFilter() === 'for-approval'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">pending</span> For Approval</div>
+            </button>
+            <button (click)="setFilter('resolved')" [class.bg-slate-50]="activeFilter() === 'resolved'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">check_circle</span> Resolved</div>
+              <span class="text-xs text-gray-400">{{ filterCounts().resolved }}</span>
+            </button>
+            
+            <div class="my-2 border-t border-gray-100 dark:border-gray-800"></div>
+            
+            <button (click)="setFilter('critical')" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <span>P1/Critical Incidents</span>
+              <span class="text-xs text-gray-400">0</span>
+            </button>
+            <button (click)="setFilter('group-work')" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+              <span>My Group Work</span>
+              <span class="text-xs text-gray-400">0</span>
+            </button>
+          </div>
+        }
       </div>
 
-      <div class="filter-section">
-        <h3 class="filter-title">TAGS / USER GROUP</h3>
-        <ul class="tag-list">
-          @for (tag of tags; track tag) {
-            <li class="tag-item">
-              <span class="tag-dot"></span>
-              <span>{{ tag }}</span>
-            </li>
-          }
-        </ul>
+      <!-- Request Group -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+        <button (click)="toggleRequest()" class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-400 text-lg">shopping_cart</span>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200">REQUEST</span>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200" [class.-rotate-180]="requestExpanded()">expand_more</span>
+        </button>
+        <!-- Mock internal content for Request if expanded -->
+      </div>
+      
+      <!-- Change Group -->
+      <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+        <button (click)="toggleChange()" class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-slate-400 text-lg">sync</span>
+            <span class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200">CHANGE</span>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200" [class.-rotate-180]="changeExpanded()">expand_more</span>
+        </button>
       </div>
     </aside>
 
@@ -116,7 +136,7 @@
       <div class="activity-header">
         <h2 class="activity-title">RECENT ACTIVITIES</h2>
         <button class="icon-btn" aria-label="Filter activities">
-          <i class="pi pi-filter"></i>
+          <span class="material-symbols-outlined text-lg">sort</span>
         </button>
       </div>
 
@@ -146,7 +166,7 @@
               <p class="activity-item-desc">{{ ticket.description }}</p>
               <div class="activity-item-footer">
                 <div class="activity-item-author">
-                  <app-user-avatar [name]="ticket.createdBy" size="normal" bgColor="#6b7280" />
+                  <app-user-avatar [name]="ticket.createdBy" [image]="getAvatarFor(ticket.createdBy)" size="normal" bgColor="#6b7280" />
                   <span>{{ ticket.createdBy }}</span>
                 </div>
                 <app-priority-badge [priority]="ticket.priority" />
@@ -154,7 +174,7 @@
             </article>
           } @empty {
             <div class="empty-state">
-              <i class="pi pi-inbox"></i>
+              <span class="material-symbols-outlined text-4xl">inbox</span>
               <p>No tickets found</p>
             </div>
           }
@@ -173,10 +193,10 @@
               (click)="openTicketDetail(ticket)"
               aria-label="Open full ticket"
             >
-              <i class="pi pi-external-link"></i>
+              <span class="material-symbols-outlined text-lg">open_in_new</span>
             </button>
             <button class="icon-btn" aria-label="More options">
-              <i class="pi pi-ellipsis-v"></i>
+              <span class="material-symbols-outlined text-lg">more_vert</span>
             </button>
           </div>
         </div>
@@ -214,7 +234,7 @@
 
           <div class="preview-message">
             <div class="message-header">
-              <app-user-avatar [name]="ticket.customer.name" size="normal" />
+              <app-user-avatar [name]="ticket.customer.name" [image]="getAvatarFor(ticket.customer.name)" size="normal" />
               <div class="message-meta">
                 <span class="message-author">{{ ticket.customer.name }}</span>
                 <span class="message-time">{{ getTimeAgo(ticket.createdAt) }}</span>
@@ -228,7 +248,7 @@
               <span class="detail-label">COLLABORATORS</span>
               <div class="collaborators-row">
                 @for (c of ticket.collaborators; track c) {
-                  <app-user-avatar [name]="c" size="normal" bgColor="#6b7280" />
+                  <app-user-avatar [name]="c" [image]="getAvatarFor(c)" size="normal" bgColor="#6b7280" />
                 }
                 @if (ticket.collaborators.length > 0) {
                   <span class="collaborator-count">+{{ ticket.collaborators.length }}</span>
@@ -250,21 +270,21 @@
             aria-label="Write a reply"
           />
           <div class="reply-actions">
-            <button class="icon-btn-sm" aria-label="Attach file"><i class="pi pi-paperclip"></i></button>
-            <button class="icon-btn-sm" aria-label="Add emoji"><i class="pi pi-face-smile"></i></button>
+            <button class="icon-btn-sm" aria-label="Attach file"><span class="material-symbols-outlined">attach_file</span></button>
+            <button class="icon-btn-sm" aria-label="Add emoji"><span class="material-symbols-outlined">mood</span></button>
             <div class="reply-right">
               <label class="private-note-toggle">
                 <span>PRIVATE NOTE</span>
               </label>
               <button class="send-btn" aria-label="Send reply">
-                <i class="pi pi-send"></i>
+                <span class="material-symbols-outlined text-lg">send</span>
               </button>
             </div>
           </div>
         </div>
       } @else {
         <div class="preview-empty">
-          <i class="pi pi-ticket"></i>
+          <span class="material-symbols-outlined text-4xl">confirmation_number</span>
           <p>Select a ticket to preview</p>
         </div>
       }

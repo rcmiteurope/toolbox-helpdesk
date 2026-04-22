@@ -2,10 +2,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { FooterComponent } from './footer.component';
+import { SidebarComponent } from './sidebar.component';
 
 @Component({
   selector: 'app-main-shell',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent],
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, SidebarComponent],
   templateUrl: './main-shell.component.html',
   styles: [
     `
@@ -14,9 +16,16 @@ import { FooterComponent } from './footer.component';
       }
       .app-layout {
         display: flex;
+        height: 100vh;
+        overflow: hidden;
+        background: #f3f4f6; /* Gray 100 to match typical app backgrounds */
+      }
+      .main-wrapper {
+        display: flex;
         flex-direction: column;
-        min-height: 100vh;
-        background: #f9fafb;
+        flex: 1;
+        min-width: 0;
+        overflow-y: auto;
       }
       .app-main {
         flex: 1;
@@ -26,7 +35,6 @@ import { FooterComponent } from './footer.component';
         max-width: 1400px;
         margin: 0 auto;
       }
-
       :host-context(.dark) .app-layout {
         background: #030712;
       }

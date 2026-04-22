@@ -5,11 +5,10 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { UserAvatarComponent } from '../user-avatar/user-avatar.component';
-import { BadgeModule } from 'primeng/badge';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, SearchBarComponent, UserAvatarComponent, BadgeModule],
+  imports: [RouterLink, RouterLinkActive, SearchBarComponent, UserAvatarComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,10 +19,9 @@ export class HeaderComponent {
   private readonly router = inject(Router);
 
   protected readonly navItems = [
-    { label: 'Overview', route: '/main/overview' },
     { label: 'Tickets', route: '/main/tickets' },
-    { label: 'Approval', route: '/main/approval' },
-    { label: 'Analytics', route: '/main/analytics' },
+    { label: 'Approvals', route: '/main/approval' },
+    { label: 'Knowledge', route: '/main/training' },
   ];
 
   logout() {

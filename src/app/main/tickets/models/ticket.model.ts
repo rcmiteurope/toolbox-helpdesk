@@ -21,9 +21,11 @@ export interface Ticket {
   category: string;
   createdAt: string;
   createdBy: string;
+  createdByAvatar?: string;
   assignedTo: string | null;
   customer: Customer;
   collaborators: string[];
+  collaboratorAvatars?: string[];
   timeLogged: number;
   tags: string[];
 }

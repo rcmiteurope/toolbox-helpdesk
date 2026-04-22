@@ -1,92 +1,232 @@
-<div class="page-container">
-  <div class="page-header">
-    <div class="header-left">
-      <button class="back-btn" (click)="goBack()" aria-label="Go back">
-        <i class="pi pi-arrow-left"></i>
-        <span>Back to Tickets</span>
+@if (ticket(); as t) {
+<div class="flex flex-col h-full bg-white ticket-detail-wrapper font-sans antialiased overflow-hidden">
+  
+  <!-- Ticket Header -->
+  <div class="flex items-center justify-between px-8 py-5 bg-white border-b border-gray-100 shrink-0">
+    <div class="flex items-center gap-5">
+      <button (click)="goBack()" class="size-10 flex items-center justify-center text-gray-400 hover:text-[#6366f1] hover:bg-gray-50 rounded-xl transition-all border border-gray-100">
+        <span class="material-symbols-outlined">arrow_back</span>
       </button>
-      
-      @if (ticket(); as t) {
-        <div class="ticket-title-row">
-          <span class="ticket-number">{{ t.ticketNumber }}</span>
-          <app-status-badge [status]="t.status" />
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="text-[11px] font-bold tracking-wider text-gray-400 uppercase bg-gray-50 px-2 py-0.5 rounded border border-gray-100">{{ t.ticketNumber }}</span>
+          <h1 class="text-xl font-bold text-gray-900 tracking-tight">{{ t.title }}</h1>
           <app-priority-badge [priority]="t.priority" />
+          <app-status-badge [status]="t.status" />
         </div>
-        <h1 class="ticket-title">{{ t.title }}</h1>
-      } @else {
-        <h1 class="ticket-title">Loading...</h1>
-      }
+        <p class="text-[13px] text-gray-500 mt-1">
+          Created by <span class="font-semibold text-gray-700">{{ t.customer.name }}</span> 
+          <span class="mx-1.5 opacity-30">•</span> {{ getTimeAgo(t.createdAt) }} in 
+          <span class="text-[#6366f1] font-medium">{{ t.category }}</span>
+        </p>
+      </div>
     </div>
-    <div class="header-right">
-      <p-button label="Edit Ticket" icon="pi pi-pencil" styleClass="p-button-outlined p-button-secondary" />
-      <p-button label="Resolve Ticket" icon="pi pi-check" styleClass="p-button-success" />
+    <div class="flex items-center gap-3">
+      <button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 text-sm font-medium text-gray-700 transition-all shadow-sm">
+        <span class="material-symbols-outlined text-[18px]">undo</span>
+        <span>Undo</span>
+      </button>
+      <button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 text-sm font-medium text-gray-700 transition-all shadow-sm">
+        <span class="material-symbols-outlined text-[18px]">tune</span>
+        <span>Manage</span>
+      </button>
+      <button (click)="onResolveTicket({category: t.category, notes: '', notify: false})" class="flex items-center gap-2 px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-all shadow-md shadow-indigo-200">
+        <span class="material-symbols-outlined text-[18px]">check_circle</span>
+        <span>Resolve</span>
+      </button>
     </div>
   </div>
 
-  @if (ticket(); as t) {
-    <div class="content-layout">
-      <!-- Left Sidebar: Activity Timeline -->
-      <aside class="left-sidebar">
-        <h3 class="sidebar-title">ACTIVITY TIMELINE</h3>
+  <main class="flex flex-1 overflow-hidden">
+    
+    <!-- Left Sidebar: Activity Timeline -->
+    <aside class="w-[340px] border-r border-gray-100 flex flex-col bg-white shrink-0 scroll-py-4">
+      <div class="px-6 py-4 border-b border-gray-100 shrink-0">
+        <h3 class="text-[11px] font-bold uppercase tracking-widest text-gray-400">Activity Timeline</h3>
+      </div>
+      <div class="flex-1 overflow-y-auto p-6 custom-scrollbar">
         <app-activity-timeline [events]="timelineEvents()" />
-      </aside>
+      </div>
+    </aside>
 
-      <!-- Center Content: Tabs -->
-      <main class="center-content">
-        <p-tabs [value]="activeTab()" (valueChange)="activeTab.set($event?.toString() || '0')">
-          <p-tablist>
-            <p-tab value="0">Discussions</p-tab>
-            <p-tab value="1">Tasks</p-tab>
-            <p-tab value="2">Resolution</p-tab>
-          </p-tablist>
-          
-          <p-tabpanels>
-            <!-- Discussions Tab -->
-            <p-tabpanel value="0">
-              <app-discussion-tab 
-                [discussions]="discussions()" 
-                (replySent)="onReplySent($event)" 
-              />
-            </p-tabpanel>
-            
-            <!-- Tasks Tab -->
-            <p-tabpanel value="1">
-              <app-task-tab 
-                [subtasks]="subtasks()" 
-                (stepToggled)="onStepToggled($event)" 
-              />
-            </p-tabpanel>
-            
-            <!-- Resolution Tab -->
-            <p-tabpanel value="2">
-              <app-resolution-tab 
-                [resolved]="t.status === 'Resolved' || t.status === 'Closed'"
-                resolutionDate="Oct 24, 2026"
-                finalNotes="Checked server logs and restarted the failing container. No further issues detected."
-                (resolveTicket)="onResolveTicket($event)"
-                (reopenTicket)="onReopenTicket()"
-              />
-            </p-tabpanel>
-          </p-tabpanels>
-        </p-tabs>
-      </main>
-
-      <!-- Right Sidebar: Details & Quick Tools -->
-      <aside class="right-sidebar">
-        <app-customer-details-panel [customer]="t.customer" />
-        
-        <div class="sidebar-divider"></div>
-        
-        <app-quick-tools-grid [tools]="quickTools" />
-        
-        <div class="sidebar-divider"></div>
-        
-        <h3 class="sidebar-title">SLA TRACKING</h3>
-        <div class="sla-list">
-          <app-sla-indicator label="FIRST RESPONSE" value="1h 24m" [progress]="100" [met]="true" />
-          <app-sla-indicator label="RESOLUTION TIME" value="2d 4h remaining" [progress]="45" [met]="false" />
+    <!-- Center Section: Activity Content -->
+    <section class="flex-1 flex flex-col bg-[#fcfcfd]">
+      <div class="px-8 py-3 bg-white border-b border-gray-100 flex items-center justify-between shrink-0">
+        <div class="flex gap-8">
+          <button (click)="activeTab.set('0')" class="text-sm font-bold pb-3 -mb-3.5 flex items-center gap-2 transition-all border-b-2"
+                  [class.text-gray-900]="activeTab() === '0'" [class.border-[#6366f1]]="activeTab() === '0'"
+                  [class.text-gray-500]="activeTab() !== '0'" [class.border-transparent]="activeTab() !== '0'">
+            <span>Discussion</span>
+            <span class="bg-gray-100 text-gray-500 text-[10px] px-1.5 py-0.5 rounded-full">{{ discussions().length }}</span>
+          </button>
+          <button (click)="activeTab.set('1')" class="text-sm font-bold pb-3 -mb-3.5 flex items-center gap-2 transition-all border-b-2"
+                  [class.text-gray-900]="activeTab() === '1'" [class.border-[#6366f1]]="activeTab() === '1'"
+                  [class.text-gray-500]="activeTab() !== '1'" [class.border-transparent]="activeTab() !== '1'">
+            <span>Tasks</span>
+            @if (subtasks().length > 0) {
+              <span class="bg-gray-100 text-gray-500 text-[10px] px-1.5 py-0.5 rounded-full">{{ subtasks().length }}</span>
+            }
+          </button>
         </div>
-      </aside>
-    </div>
-  }
+        <div class="flex items-center gap-3">
+          <div class="flex -space-x-1.5">
+            @for (c of t.collaborators; track c) {
+              <app-user-avatar [name]="c" size="normal" />
+            }
+          </div>
+          <span class="text-xs font-medium text-gray-500">{{ t.collaborators.length || 0 }} Participants</span>
+        </div>
+      </div>
+      
+      <!-- Content Area -->
+      <div class="flex-1 overflow-y-auto p-8 space-y-8 custom-scrollbar relative">
+        @if (activeTab() === '1') {
+          <!-- Tasks Tab -->
+          <div class="max-w-3xl mx-auto space-y-4">
+            <app-task-tab 
+              [subtasks]="subtasks()" 
+              (stepToggled)="onStepToggled($event)" 
+            />
+          </div>
+        } @else {
+          <!-- Ticket Description as Initial Message -->
+          <div class="flex gap-4 max-w-3xl relative group">
+            <app-user-avatar [name]="t.customer.name" size="normal" class="mt-1" />
+            <div class="flex flex-col gap-1.5 flex-1">
+              <div class="flex items-center gap-2 w-full">
+                <span class="text-sm font-bold text-gray-900">{{ t.customer.name }}</span>
+                <span class="flex items-center gap-1 text-[10px] font-bold text-indigo-600 bg-indigo-50 px-1.5 py-0.5 rounded uppercase tracking-wider border border-indigo-100">
+                  <span class="material-symbols-outlined text-[12px]">description</span> Original Issue
+                </span>
+                <span class="text-[11px] text-gray-500 ml-auto">{{ formatTime(t.createdAt) }}</span>
+              </div>
+              <div class="bg-indigo-50/30 border border-indigo-100/50 p-5 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl text-sm leading-relaxed text-gray-800 shadow-sm">
+                {{ t.description }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Discussions -->
+          @for (msg of discussions(); track msg.id) {
+            <div class="flex gap-4 max-w-3xl relative group" [class.ml-auto]="msg.authorRole === 'Admin'" [class.flex-row-reverse]="msg.authorRole === 'Admin'">
+              @if (msg.visibility === 'public') {
+                <div class="absolute top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" [class.-left-4]="msg.authorRole !== 'Admin'" [class.-right-4]="msg.authorRole === 'Admin'">
+                  <div class="bg-white border border-gray-100 shadow-sm p-1 rounded-lg flex flex-col gap-1">
+                    <span class="material-symbols-outlined text-[16px] text-gray-400">public</span>
+                  </div>
+                </div>
+              }
+              
+              <app-user-avatar [name]="msg.author" size="normal" class="mt-1" />
+              
+              <div class="flex flex-col gap-1.5 flex-1" [class.items-end]="msg.authorRole === 'Admin'">
+                <div class="flex items-center gap-2 w-full" [class.justify-end]="msg.authorRole === 'Admin'">
+                  @if (msg.authorRole === 'Admin') {
+                    <span class="text-[11px] text-gray-500 mr-auto">{{ formatTime(msg.createdAt) }}</span>
+                  }
+                  
+                  <span class="text-sm font-bold text-gray-900">{{ msg.author }}</span>
+                  <span class="flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider border"
+                        [class.text-gray-400]="msg.visibility === 'public'"
+                        [class.bg-gray-50]="msg.visibility === 'public'"
+                        [class.border-gray-100]="msg.visibility === 'public'"
+                        [class.text-amber-600]="msg.visibility === 'internal'"
+                        [class.bg-amber-50]="msg.visibility === 'internal'"
+                        [class.border-amber-100]="msg.visibility === 'internal'">
+                    <span class="material-symbols-outlined text-[12px] font-bold">{{ msg.visibility === 'internal' ? 'lock' : 'public' }}</span>
+                    {{ msg.visibility === 'internal' ? 'Internal' : 'Public' }}
+                  </span>
+                  
+                  @if (msg.authorRole !== 'Admin') {
+                    <span class="text-[11px] text-gray-500 ml-auto">{{ formatTime(msg.createdAt) }}</span>
+                  }
+                </div>
+
+                @if (msg.authorRole === 'Admin') {
+                  <div class="p-4 rounded-tl-2xl rounded-bl-2xl rounded-br-2xl text-sm leading-relaxed shadow-lg shadow-indigo-600/10 bg-[#6366f1] text-white">
+                    {{ msg.message }}
+                  </div>
+                } @else if (msg.visibility === 'internal') {
+                  <div class="bg-amber-50/50 border border-amber-100 p-4 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl text-sm leading-relaxed text-amber-900 shadow-sm italic">
+                    {{ msg.message }}
+                  </div>
+                } @else {
+                  <div class="bg-white border border-gray-200 p-4 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl text-sm leading-relaxed text-gray-800 shadow-sm">
+                    {{ msg.message }}
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        }
+      </div>
+      
+      <!-- Reply Box Segment -->
+      @if (activeTab() === '0') {
+        <div class="p-6 bg-white border-t border-gray-100">
+          <div class="bg-gray-50 rounded-2xl border border-gray-200 focus-within:border-[#6366f1]/50 focus-within:ring-4 focus-within:ring-[#6366f1]/5 transition-all overflow-hidden">
+            <div class="flex p-1 gap-1 bg-gray-100/50 border-b border-gray-100">
+              <button #publicModeBtn (click)="replyMode = 'public'" class="flex-1 flex items-center justify-center gap-2 py-2 text-[11px] font-bold uppercase tracking-wider rounded-xl transition-all"
+                [class.text-[#6366f1]]="replyMode === 'public'" [class.bg-white]="replyMode === 'public'" [class.shadow-sm]="replyMode === 'public'" [class.border]="replyMode === 'public'" [class.border-gray-200/50]="replyMode === 'public'"
+                [class.text-gray-400]="replyMode !== 'public'">
+                <span class="material-symbols-outlined text-[16px]">public</span>
+                <span>Public Reply</span>
+              </button>
+              <button #internalModeBtn (click)="replyMode = 'internal'" class="flex-1 flex items-center justify-center gap-2 py-2 text-[11px] font-bold uppercase tracking-wider rounded-xl transition-all"
+                [class.text-amber-600]="replyMode === 'internal'" [class.bg-white]="replyMode === 'internal'" [class.shadow-sm]="replyMode === 'internal'" [class.border]="replyMode === 'internal'" [class.border-gray-200/50]="replyMode === 'internal'"
+                [class.text-gray-400]="replyMode !== 'internal'">
+                <span class="material-symbols-outlined text-[16px]">lock</span>
+                <span>Internal Note</span>
+              </button>
+            </div>
+            <textarea #replyInput class="w-full bg-transparent border-none focus:ring-0 text-sm py-4 px-5 resize-none h-24 placeholder:text-gray-400" placeholder="Reply to customer..."></textarea>
+            <div class="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-100">
+              <div class="flex items-center gap-1">
+                <button class="p-2 text-gray-400 hover:text-[#6366f1] hover:bg-gray-50 rounded-lg transition-colors"><span class="material-symbols-outlined">format_bold</span></button>
+                <button class="p-2 text-gray-400 hover:text-[#6366f1] hover:bg-gray-50 rounded-lg transition-colors"><span class="material-symbols-outlined">attach_file</span></button>
+                <button class="p-2 text-gray-400 hover:text-[#6366f1] hover:bg-gray-50 rounded-lg transition-colors"><span class="material-symbols-outlined">image</span></button>
+                <button class="p-2 text-gray-400 hover:text-[#6366f1] hover:bg-gray-50 rounded-lg transition-colors"><span class="material-symbols-outlined">emoji_emotions</span></button>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 mr-2">
+                  <span class="size-2 rounded-full animate-pulse" [class.bg-green-500]="replyMode === 'public'" [class.bg-amber-500]="replyMode === 'internal'"></span>
+                  <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">Visibility: {{ replyMode === 'public' ? 'Public' : 'Internal' }}</span>
+                </div>
+                <button (click)="onReplySent({text: replyInput.value, isInternal: replyMode === 'internal'}); replyInput.value = ''" class="px-5 py-2 bg-[#6366f1] text-white rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-indigo-700 transition-all shadow-md shadow-indigo-600/20">
+                  <span>Send Message</span>
+                  <span class="material-symbols-outlined text-[18px]">send</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </section>
+
+    <!-- Right Sidebar -->
+    <aside class="w-80 border-l border-gray-100 bg-white flex flex-col shrink-0 custom-scrollbar overflow-y-auto">
+      <div class="p-6">
+        <app-customer-details-panel [customer]="t.customer" />
+      </div>
+      
+      <div class="p-6 border-t border-gray-100">
+        <app-quick-tools-grid [tools]="quickTools" />
+      </div>
+      
+      <div class="mt-auto p-6 bg-gray-50/50 border-t border-gray-100">
+        <h3 class="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-4">SLA STATUS</h3>
+        <div class="space-y-4">
+          <app-sla-indicator label="First Response" value="Met ✓" [progress]="100" [met]="true" />
+          <app-sla-indicator label="Resolution" value="2h remaining" [progress]="65" [met]="false" />
+        </div>
+      </div>
+    </aside>
+
+  </main>
 </div>
+} @else {
+<div class="flex items-center justify-center min-h-[500px]">
+  <p class="text-gray-500 font-medium">Loading ticket details...</p>
+</div>
+}
+

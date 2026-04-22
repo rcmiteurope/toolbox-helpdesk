@@ -1,147 +1,78 @@
-<aside
-  class="w-64 border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 h-screen sticky top-0 hidden md:flex flex-col transition-colors duration-200"
->
-  <div class="p-6">
-    <nav class="space-y-1">
-      <a
-        routerLink="/main"
-        routerLinkActive="bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-          <polyline points="9 22 9 12 15 12 15 22" />
-        </svg>
-        Dashboard
-      </a>
-      <a
-        routerLink="/main/design-system"
-        routerLinkActive="bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400"
-        class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-          <line x1="3" x2="21" y1="9" y2="9" />
-          <line x1="9" x2="9" y1="21" y2="9" />
-        </svg>
-        Design System
-      </a>
-      <a
-        routerLink="/main/training"
-        routerLinkActive="bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400"
-        class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-        </svg>
-        Training
-      </a>
-      <a
-        routerLink="/main/exercise"
-        routerLinkActive="bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400"
-        class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M12 20h9" />
-          <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
-        </svg>
-        Exercise
-      </a>
-      <a
-        routerLink="/main/tickets"
-        routerLinkActive="bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400"
-        class="flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-          <path d="M12 11h4" />
-          <path d="M12 16h4" />
-          <path d="M8 11h.01" />
-          <path d="M8 16h.01" />
-        </svg>
-        Tickets
-      </a>
-    </nav>
+<aside class="flex flex-col h-screen bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800 transition-all duration-300 ease-in-out shrink-0"
+       [class.w-64]="isExpanded()" [class.w-20]="!isExpanded()">
+  
+  <!-- Logo Section -->
+  <div class="flex items-center gap-4 py-8 px-5">
+    <div class="w-10 h-10 rounded-xl bg-gray-900 text-white flex items-center justify-center shrink-0 shadow-sm">
+      <span class="material-symbols-outlined block text-xl">confirmation_number</span>
+    </div>
+    @if (isExpanded()) {
+      <div class="font-bold text-xl text-gray-900 dark:text-white whitespace-nowrap overflow-hidden transition-all duration-300 opacity-100">
+        RCM
+      </div>
+    }
   </div>
 
-  <div class="mt-auto p-6 space-y-4 border-t border-gray-100 dark:border-gray-800">
-    <button
-      (click)="logout()"
-      class="flex w-full items-center gap-3 px-3 py-2 text-sm font-medium text-error hover:bg-error/10 rounded-lg transition-colors"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-        <polyline points="16 17 21 12 16 7" />
-        <line x1="21" x2="9" y1="12" y2="12" />
-      </svg>
-      Logout
+  <!-- Navigation Items -->
+  <nav class="flex-1 px-4 py-2 space-y-3 overflow-y-auto overflow-x-hidden">
+    <a routerLink="/main/overview" routerLinkActive="bg-slate-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400 font-semibold shadow-sm" [routerLinkActiveOptions]="{ exact: true }" class="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-gray-800 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all">
+      <span class="material-symbols-outlined text-xl shrink-0">home</span>
+      @if (isExpanded()) {
+        <span class="whitespace-nowrap truncate animate-fadein">Home</span>
+      }
+    </a>
+    
+    <a routerLink="/main/knowledge" routerLinkActive="bg-slate-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400 font-semibold shadow-sm" class="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-gray-800 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all">
+      <span class="material-symbols-outlined text-xl shrink-0">library_books</span>
+      @if (isExpanded()) {
+        <span class="whitespace-nowrap truncate animate-fadein">Knowledge</span>
+      }
+    </a>
+
+    <a routerLink="/main/tickets" routerLinkActive="bg-slate-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400 font-semibold shadow-sm" class="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-gray-800 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all">
+      <span class="material-symbols-outlined text-xl shrink-0">inbox</span>
+      @if (isExpanded()) {
+        <span class="whitespace-nowrap truncate animate-fadein">Tickets</span>
+      }
+    </a>
+
+    <a routerLink="/main/approvals" routerLinkActive="bg-slate-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400 font-semibold shadow-sm" class="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-gray-800 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all">
+      <span class="material-symbols-outlined text-xl shrink-0">verified_user</span>
+      @if (isExpanded()) {
+        <span class="whitespace-nowrap truncate animate-fadein">Approvals</span>
+      }
+    </a>
+
+    <a routerLink="/main/customers" routerLinkActive="bg-slate-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400 font-semibold shadow-sm" class="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-gray-800 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all">
+      <span class="material-symbols-outlined text-xl shrink-0">group</span>
+      @if (isExpanded()) {
+        <span class="whitespace-nowrap truncate animate-fadein">Customers</span>
+      }
+    </a>
+
+    <a routerLink="/main/analytics" routerLinkActive="bg-slate-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400 font-semibold shadow-sm" class="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 dark:hover:bg-gray-800 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-all">
+      <span class="material-symbols-outlined text-xl shrink-0">insights</span>
+      @if (isExpanded()) {
+        <span class="whitespace-nowrap truncate animate-fadein">Analytics</span>
+      }
+    </a>
+  </nav>
+
+  <!-- Bottom Actions -->
+  <div class="p-4 space-y-2 mt-auto border-t border-gray-100 dark:border-gray-800 pt-6">
+    <a routerLink="/main/settings" routerLinkActive="bg-slate-50 text-indigo-600" class="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 text-gray-500 hover:text-gray-900 transition-all font-medium">
+      <span class="material-symbols-outlined text-xl shrink-0">settings</span>
+      @if (isExpanded()) {
+        <span class="whitespace-nowrap truncate animate-fadein">Settings</span>
+      }
+    </a>
+    <button (click)="toggleSidebar()" class="w-full flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-slate-50 text-gray-400 hover:text-gray-900 transition-all font-medium text-left">
+      @if (isExpanded()) {
+        <span class="material-symbols-outlined text-xl shrink-0">menu_open</span>
+        <span class="whitespace-nowrap truncate animate-fadein">Collapse Menu</span>
+      } @else {
+        <span class="material-symbols-outlined text-xl shrink-0">menu</span>
+      }
     </button>
-    <div class="p-4 bg-primary/5 dark:bg-primary/20 rounded-xl">
-      <p class="text-xs font-semibold text-primary uppercase tracking-wider mb-1">Status</p>
-      <p class="text-xs text-primary/80">Everything up to date</p>
-    </div>
   </div>
 </aside>

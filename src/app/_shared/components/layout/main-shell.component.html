@@ -1,11 +1,15 @@
 <div class="app-layout">
-  <app-header />
+  <app-sidebar />
+  
+  <div class="main-wrapper bg-slate-50 dark:bg-gray-950">
+    <app-header />
 
-  <main class="app-main">
-    <div class="app-content">
-      <router-outlet />
-    </div>
-  </main>
+    <main class="app-main">
+      <div class="app-content">
+        <router-outlet />
+      </div>
+    </main>
 
-  <app-footer />
+    <app-footer />
+  </div>
 </div>

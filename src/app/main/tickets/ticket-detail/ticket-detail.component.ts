@@ -13,14 +13,12 @@ import { TicketService } from '../services/ticket.service';
 import { Ticket, Discussion, TimelineEvent, Subtask } from '../models/ticket.model';
 import { ActivityTimelineComponent } from '../../../_shared/components/activity-timeline/activity-timeline.component';
 import { CustomerDetailsPanelComponent } from '../../../_shared/components/customer-details-panel/customer-details-panel.component';
-import { QuickToolsGridComponent, QuickTool } from '../../../_shared/components/quick-tools-grid/quick-tools-grid.component';
+import { QuickToolsGridComponent } from '../../../_shared/components/quick-tools-grid/quick-tools-grid.component';
 import { SlaIndicatorComponent } from '../../../_shared/components/sla-indicator/sla-indicator.component';
 import { StatusBadgeComponent } from '../../../_shared/components/status-badge/status-badge.component';
 import { PriorityBadgeComponent } from '../../../_shared/components/priority-badge/priority-badge.component';
-import { DiscussionTabComponent } from './components/discussion-tab/discussion-tab.component';
+import { UserAvatarComponent } from '../../../_shared/components/user-avatar/user-avatar.component';
 import { TaskTabComponent } from './components/task-tab/task-tab.component';
-import { ResolutionTabComponent } from './components/resolution-tab/resolution-tab.component';
-import { Button } from 'primeng/button';
 import { TabsModule } from 'primeng/tabs';
 import { BaseApiService } from '../../../_shared/services/api/base-api.service';
 
@@ -33,10 +31,8 @@ import { BaseApiService } from '../../../_shared/services/api/base-api.service';
     SlaIndicatorComponent,
     StatusBadgeComponent,
     PriorityBadgeComponent,
-    DiscussionTabComponent,
+    UserAvatarComponent,
     TaskTabComponent,
-    ResolutionTabComponent,
-    Button,
     TabsModule,
   ],
   templateUrl: './ticket-detail.component.html',
@@ -55,12 +51,14 @@ export class TicketDetailComponent implements OnInit {
   protected readonly subtasks = signal<Subtask[]>([]);
   protected readonly activeTab = signal('0');
 
-  protected readonly quickTools: QuickTool[] = [
+  protected readonly quickTools = [
     { label: 'History', icon: 'pi pi-history' },
     { label: 'Call', icon: 'pi pi-phone' },
     { label: 'Email', icon: 'pi pi-envelope' },
     { label: 'Share', icon: 'pi pi-share-alt' },
   ];
+
+  protected replyMode: 'public' | 'internal' = 'public';
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');

@@ -1,48 +1,46 @@
-<header class="app-header">
-  <div class="header-left">
-    <a routerLink="/main" class="logo-link" aria-label="RCM Home">
-      <div class="logo-icon">
-        <i class="pi pi-box"></i>
-      </div>
-      <span class="logo-text">RCM</span>
-    </a>
-
-    <nav class="nav-tabs" aria-label="Main navigation">
-      @for (item of navItems; track item.route) {
-        <a
-          [routerLink]="item.route"
-          routerLinkActive="active"
-          class="nav-tab"
-          [attr.aria-current]="undefined"
-        >
-          {{ item.label }}
-        </a>
-      }
-    </nav>
+<header class="flex items-center justify-between px-6 py-3 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+  <div class="flex-1">
+    <app-search-bar class="block w-full max-w-sm" />
   </div>
 
-  <div class="header-right">
-    <app-search-bar />
+  <nav class="flex gap-8 justify-center flex-1" aria-label="Main navigation">
+    @for (item of navItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="border-blue-600 text-gray-900 dark:text-white font-semibold"
+        class="pb-2 border-b-2 border-transparent text-gray-500 hover:text-gray-900 dark:hover:text-white font-medium transition-colors"
+        [attr.aria-current]="undefined"
+      >
+        {{ item.label }}
+      </a>
+    }
+  </nav>
 
+  <div class="flex items-center gap-4 flex-1 justify-end">
+    <!-- Theme Toggle -->
     <button
-      class="icon-button"
+      class="p-2 text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
       (click)="themeService.toggleTheme()"
       [title]="themeService.theme() === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'"
       aria-label="Toggle theme"
     >
       @if (themeService.theme() === 'light') {
-        <i class="pi pi-moon"></i>
+        <span class="material-symbols-outlined text-lg">dark_mode</span>
       } @else {
-        <i class="pi pi-sun"></i>
+        <span class="material-symbols-outlined text-lg">light_mode</span>
       }
     </button>
 
-    <button class="icon-button notification-button" aria-label="Notifications">
-      <i class="pi pi-bell" pBadge value="3" severity="danger"></i>
+    <!-- Notification -->
+    <button class="relative p-2 text-gray-500 hover:text-gray-900 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+      <span class="material-symbols-outlined text-lg">notifications</span>
+      <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 border border-white dark:border-gray-900 rounded-full"></span>
     </button>
 
-    <button class="avatar-button" (click)="logout()" aria-label="User menu">
+    <!-- User Profile -->
+    <button class="hover:opacity-80 transition-opacity flex items-center" (click)="logout()" aria-label="User menu">
       <app-user-avatar name="John Doe" size="normal" />
+      <span class="material-symbols-outlined ml-2 text-gray-500 text-sm">expand_more</span>
     </button>
   </div>
 </header>

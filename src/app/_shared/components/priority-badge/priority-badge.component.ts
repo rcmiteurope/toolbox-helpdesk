@@ -17,11 +17,19 @@ import { TicketPriority } from '../../../main/tickets/models/ticket.model';
       display: inline-flex;
     }
     :host ::ng-deep .p-tag {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.5rem;
+    }
+    :host ::ng-deep .p-tag.p-tag-danger {
+      background: #fef2f2;
+      color: #ef4444;
+    }
+    :host ::ng-deep .p-tag.p-tag-info {
+      background: #f1f5f9;
+      color: #475569;
     }
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,7 +46,7 @@ export class PriorityBadgeComponent {
       case 'Medium':
         return 'warn';
       case 'Normal':
-        return 'secondary';
+        return 'info';
       case 'Low':
         return 'success';
       default:

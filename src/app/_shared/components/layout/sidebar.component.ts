@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -12,6 +12,13 @@ import { AuthService } from '../../services/auth/auth.service';
 export class SidebarComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
+
+  // State
+  readonly isExpanded = signal<boolean>(false);
+
+  toggleSidebar() {
+    this.isExpanded.update(v => !v);
+  }
 
   logout() {
     this.authService.logout();
