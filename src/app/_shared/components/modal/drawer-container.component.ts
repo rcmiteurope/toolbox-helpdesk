@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActiveModal } from '../../models/modal/active-modal';
-import { animate, style, transition, trigger, state } from '@angular/animations';
 import { CdkPortalOutlet } from '@angular/cdk/portal';
 import { DRAWER_CONFIG } from '../../models/modal/drawer-config';
 

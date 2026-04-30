@@ -23,7 +23,6 @@ type FilterType = 'all' | 'assigned' | 'assigned-to-me' | 'urgent' | 'in-progres
     StatusBadgeComponent,
     PriorityBadgeComponent,
     UserAvatarComponent,
-    Button,
     Skeleton,
   ],
   templateUrl: './tickets.component.html',

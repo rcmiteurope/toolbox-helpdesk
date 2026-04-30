@@ -29,4 +29,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./analytics/analytics.component').then((m) => m.AnalyticsComponent),
   },
+   {
+    path: 'design',
+    loadComponent: () =>
+      import('./design-system/design-system.component').then((m) => m.DesignSystemComponent),
+  },
 ];

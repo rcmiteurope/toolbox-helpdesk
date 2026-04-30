@@ -9,7 +9,6 @@ import {
 import { CdkPortalOutlet } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { ActiveModal } from '../../models/modal/active-modal';
-import { animate, style, transition, trigger, state } from '@angular/animations';
 
 @Component({
   selector: 'app-modal-container',

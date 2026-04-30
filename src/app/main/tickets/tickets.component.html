@@ -1,26 +1,46 @@
 <main class="tickets-page">
   <!-- Service Catalog -->
   <div class="mb-8">
-    <h2 class="text-xs font-bold tracking-wider text-gray-900 dark:text-white uppercase mb-1">SERVICE CATALOG</h2>
+    <h2 class="text-xs font-bold tracking-wider text-gray-900 dark:text-white uppercase mb-1">
+      SERVICE CATALOG
+    </h2>
     <p class="text-sm text-gray-500 mb-4">Select a service</p>
     <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
-      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
-        <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">desktop_windows</span>
-        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Hardware Related Issues</span>
+      <div
+        class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center"
+      >
+        <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]"
+          >desktop_windows</span
+        >
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300"
+          >Hardware Related Issues</span
+        >
       </div>
-      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+      <div
+        class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center"
+      >
         <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">image</span>
-        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Software Related Issues</span>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300"
+          >Software Related Issues</span
+        >
       </div>
-      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+      <div
+        class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center"
+      >
         <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">refresh</span>
         <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Password Reset</span>
       </div>
-      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+      <div
+        class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center"
+      >
         <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">mail</span>
-        <span class="text-xs font-medium text-gray-700 dark:text-gray-300">Report Suspicious Email</span>
+        <span class="text-xs font-medium text-gray-700 dark:text-gray-300"
+          >Report Suspicious Email</span
+        >
       </div>
-      <div class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center">
+      <div
+        class="flex flex-col items-center justify-center p-6 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl hover:border-gray-300 transition-colors cursor-pointer text-center"
+      >
         <span class="material-symbols-outlined text-gray-400 mb-3 text-[28px]">description</span>
         <span class="text-xs font-medium text-gray-700 dark:text-gray-300">EARF Submission</span>
       </div>
@@ -30,9 +50,27 @@
   <!-- Stat Cards Row -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
     @if (stats(); as s) {
-      <app-stat-card label="Open Tickets" [value]="s.openTickets" [change]="s.openTicketsChange" changeType="success" iconClass="mail" />
-      <app-stat-card label="Pending Approvals" [value]="s.pendingApprovals" [change]="s.pendingApprovalsChange" changeType="neutral" iconClass="verified_user" />
-      <app-stat-card label="Avg. Resolution" [value]="s.avgResolutionTime" [change]="s.avgResolutionChange" changeType="danger" iconClass="timer" />
+      <app-stat-card
+        label="Open Tickets"
+        [value]="s.openTickets"
+        [change]="s.openTicketsChange"
+        changeType="success"
+        iconClass="mail"
+      />
+      <app-stat-card
+        label="Pending Approvals"
+        [value]="s.pendingApprovals"
+        [change]="s.pendingApprovalsChange"
+        changeType="neutral"
+        iconClass="verified_user"
+      />
+      <app-stat-card
+        label="Avg. Resolution"
+        [value]="s.avgResolutionTime"
+        [change]="s.avgResolutionChange"
+        changeType="danger"
+        iconClass="timer"
+      />
     } @else {
       @for (i of [1, 2, 3]; track i) {
         <p-skeleton width="100%" height="100px" borderRadius="12px" />
@@ -45,61 +83,143 @@
     <!-- Left: Incident/Request Sidebar -->
     <aside class="w-64 shrink-0 flex flex-col gap-6 overflow-y-auto pr-2">
       <!-- Incident Group -->
-      <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
-        <button (click)="toggleIncident()" class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors">
+      <div
+        class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden"
+      >
+        <button
+          (click)="toggleIncident()"
+          class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors"
+        >
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-slate-400 text-lg">error_outline</span>
-            <span class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200">INCIDENT</span>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200"
+              >INCIDENT</span
+            >
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200" [class.-rotate-180]="incidentExpanded()">expand_more</span>
+          <span
+            class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200"
+            [class.-rotate-180]="incidentExpanded()"
+            >expand_more</span
+          >
         </button>
-        
+
         @if (incidentExpanded()) {
           <div class="px-2 pb-2 space-y-1">
-            <a routerLink="/main/tickets/new" class="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors">
+            <a
+              routerLink="/main/tickets/new"
+              class="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors"
+            >
               <span class="material-symbols-outlined text-lg">add</span>
               Create New
             </a>
-            
-            <button (click)="setFilter('all')" [class.bg-slate-50]="activeFilter() === 'all'" [class.font-semibold]="activeFilter() === 'all'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">book</span> All Tickets</div>
+
+            <button
+              (click)="setFilter('all')"
+              [class.bg-slate-50]="activeFilter() === 'all'"
+              [class.font-semibold]="activeFilter() === 'all'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg">book</span> All
+                Tickets
+              </div>
               <span class="text-xs text-gray-400">{{ filterCounts().all }}</span>
             </button>
-            <button (click)="setFilter('assigned')" [class.bg-slate-50]="activeFilter() === 'assigned'" [class.font-semibold]="activeFilter() === 'assigned'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">person</span> Assigned</div>
+            <button
+              (click)="setFilter('assigned')"
+              [class.bg-slate-50]="activeFilter() === 'assigned'"
+              [class.font-semibold]="activeFilter() === 'assigned'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg">person</span> Assigned
+              </div>
               <span class="text-xs text-gray-400">{{ filterCounts().assigned }}</span>
             </button>
-            <button (click)="setFilter('assigned-to-me')" [class.bg-slate-50]="activeFilter() === 'assigned-to-me'" [class.font-semibold]="activeFilter() === 'assigned-to-me'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">person_edit</span> Assigned to me</div>
+            <button
+              (click)="setFilter('assigned-to-me')"
+              [class.bg-slate-50]="activeFilter() === 'assigned-to-me'"
+              [class.font-semibold]="activeFilter() === 'assigned-to-me'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg">person_edit</span>
+                Assigned to me
+              </div>
               <span class="text-xs text-gray-400">{{ filterCounts().assignedToMe }}</span>
             </button>
-            <button (click)="setFilter('urgent')" [class.bg-slate-50]="activeFilter() === 'urgent'" [class.font-semibold]="activeFilter() === 'urgent'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">bolt</span> Urgent</div>
+            <button
+              (click)="setFilter('urgent')"
+              [class.bg-slate-50]="activeFilter() === 'urgent'"
+              [class.font-semibold]="activeFilter() === 'urgent'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg">bolt</span> Urgent
+              </div>
               <span class="text-xs text-red-500 font-medium">{{ filterCounts().urgent }}</span>
             </button>
-            <button (click)="setFilter('in-progress')" [class.bg-slate-50]="activeFilter() === 'in-progress'" [class.font-semibold]="activeFilter() === 'in-progress'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">progress_activity</span> In Progress</div>
+            <button
+              (click)="setFilter('in-progress')"
+              [class.bg-slate-50]="activeFilter() === 'in-progress'"
+              [class.font-semibold]="activeFilter() === 'in-progress'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg"
+                  >progress_activity</span
+                >
+                In Progress
+              </div>
               <span class="text-xs text-gray-400">{{ filterCounts().inProgress }}</span>
             </button>
-            <button (click)="setFilter('closed')" [class.bg-slate-50]="activeFilter() === 'closed'" [class.font-semibold]="activeFilter() === 'closed'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">cancel</span> Closed</div>
+            <button
+              (click)="setFilter('closed')"
+              [class.bg-slate-50]="activeFilter() === 'closed'"
+              [class.font-semibold]="activeFilter() === 'closed'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg">cancel</span> Closed
+              </div>
               <span class="text-xs text-gray-400">{{ filterCounts().closed }}</span>
             </button>
-            <button (click)="setFilter('for-approval')" [class.bg-slate-50]="activeFilter() === 'for-approval'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">pending</span> For Approval</div>
+            <button
+              (click)="setFilter('for-approval')"
+              [class.bg-slate-50]="activeFilter() === 'for-approval'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg">pending</span> For
+                Approval
+              </div>
             </button>
-            <button (click)="setFilter('resolved')" [class.bg-slate-50]="activeFilter() === 'resolved'" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div class="flex items-center gap-3"><span class="material-symbols-outlined text-gray-400 text-lg">check_circle</span> Resolved</div>
+            <button
+              (click)="setFilter('resolved')"
+              [class.bg-slate-50]="activeFilter() === 'resolved'"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-gray-400 text-lg">check_circle</span>
+                Resolved
+              </div>
               <span class="text-xs text-gray-400">{{ filterCounts().resolved }}</span>
             </button>
-            
+
             <div class="my-2 border-t border-gray-100 dark:border-gray-800"></div>
-            
-            <button (click)="setFilter('critical')" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+
+            <button
+              (click)="setFilter('critical')"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
               <span>P1/Critical Incidents</span>
               <span class="text-xs text-gray-400">0</span>
             </button>
-            <button (click)="setFilter('group-work')" class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+            <button
+              (click)="setFilter('group-work')"
+              class="flex items-center justify-between w-full px-3 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
               <span>My Group Work</span>
               <span class="text-xs text-gray-400">0</span>
             </button>
@@ -108,25 +228,49 @@
       </div>
 
       <!-- Request Group -->
-      <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
-        <button (click)="toggleRequest()" class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors">
+      <div
+        class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden"
+      >
+        <button
+          (click)="toggleRequest()"
+          class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors"
+        >
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-slate-400 text-lg">shopping_cart</span>
-            <span class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200">REQUEST</span>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200"
+              >REQUEST</span
+            >
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200" [class.-rotate-180]="requestExpanded()">expand_more</span>
+          <span
+            class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200"
+            [class.-rotate-180]="requestExpanded()"
+            >expand_more</span
+          >
         </button>
         <!-- Mock internal content for Request if expanded -->
       </div>
-      
+
       <!-- Change Group -->
-      <div class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
-        <button (click)="toggleChange()" class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors">
+      <div
+        class="bg-white dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 overflow-hidden"
+      >
+        <button
+          (click)="toggleChange()"
+          class="flex items-center justify-between w-full p-4 text-xs font-bold text-gray-900 dark:text-white tracking-wider focus:outline-none bg-slate-50/50 hover:bg-slate-50 transition-colors"
+        >
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-slate-400 text-lg">sync</span>
-            <span class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200">CHANGE</span>
+            <span
+              class="text-xs font-bold uppercase tracking-widest text-slate-800 dark:text-gray-200"
+              >CHANGE</span
+            >
           </div>
-          <span class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200" [class.-rotate-180]="changeExpanded()">expand_more</span>
+          <span
+            class="material-symbols-outlined text-slate-400 text-base transition-transform duration-200"
+            [class.-rotate-180]="changeExpanded()"
+            >expand_more</span
+          >
         </button>
       </div>
     </aside>
@@ -166,7 +310,12 @@
               <p class="activity-item-desc">{{ ticket.description }}</p>
               <div class="activity-item-footer">
                 <div class="activity-item-author">
-                  <app-user-avatar [name]="ticket.createdBy" [image]="getAvatarFor(ticket.createdBy)" size="normal" bgColor="#6b7280" />
+                  <app-user-avatar
+                    [name]="ticket.createdBy"
+                    [image]="getAvatarFor(ticket.createdBy)"
+                    size="normal"
+                    bgColor="#6b7280"
+                  />
                   <span>{{ ticket.createdBy }}</span>
                 </div>
                 <app-priority-badge [priority]="ticket.priority" />
@@ -234,7 +383,11 @@
 
           <div class="preview-message">
             <div class="message-header">
-              <app-user-avatar [name]="ticket.customer.name" [image]="getAvatarFor(ticket.customer.name)" size="normal" />
+              <app-user-avatar
+                [name]="ticket.customer.name"
+                [image]="getAvatarFor(ticket.customer.name)"
+                size="normal"
+              />
               <div class="message-meta">
                 <span class="message-author">{{ ticket.customer.name }}</span>
                 <span class="message-time">{{ getTimeAgo(ticket.createdAt) }}</span>
@@ -248,7 +401,12 @@
               <span class="detail-label">COLLABORATORS</span>
               <div class="collaborators-row">
                 @for (c of ticket.collaborators; track c) {
-                  <app-user-avatar [name]="c" [image]="getAvatarFor(c)" size="normal" bgColor="#6b7280" />
+                  <app-user-avatar
+                    [name]="c"
+                    [image]="getAvatarFor(c)"
+                    size="normal"
+                    bgColor="#6b7280"
+                  />
                 }
                 @if (ticket.collaborators.length > 0) {
                   <span class="collaborator-count">+{{ ticket.collaborators.length }}</span>
@@ -270,8 +428,12 @@
             aria-label="Write a reply"
           />
           <div class="reply-actions">
-            <button class="icon-btn-sm" aria-label="Attach file"><span class="material-symbols-outlined">attach_file</span></button>
-            <button class="icon-btn-sm" aria-label="Add emoji"><span class="material-symbols-outlined">mood</span></button>
+            <button class="icon-btn-sm" aria-label="Attach file">
+              <span class="material-symbols-outlined">attach_file</span>
+            </button>
+            <button class="icon-btn-sm" aria-label="Add emoji">
+              <span class="material-symbols-outlined">mood</span>
+            </button>
             <div class="reply-right">
               <label class="private-note-toggle">
                 <span>PRIVATE NOTE</span>

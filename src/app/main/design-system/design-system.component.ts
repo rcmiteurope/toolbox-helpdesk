@@ -6,6 +6,11 @@ import {
   inject,
   TemplateRef,
 } from '@angular/core';
+import { StatCardComponent } from '../../_shared/components/stat-card/stat-card.component';
+import { StatusBadgeComponent } from '../../_shared/components/status-badge/status-badge.component';
+import { PriorityBadgeComponent } from '../../_shared/components/priority-badge/priority-badge.component';
+import { UserAvatarComponent } from '../../_shared/components/user-avatar/user-avatar.component';
+import { Skeleton } from 'primeng/skeleton';
 import { CommonModule } from '@angular/common';
 import {
   FormsModule,
@@ -24,7 +29,7 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-design-system',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule, StatCardComponent, StatusBadgeComponent, PriorityBadgeComponent, UserAvatarComponent, Skeleton],
   templateUrl: './design-system.component.html',
   styleUrls: ['./design-system.component.css'],
   encapsulation: ViewEncapsulation.None,
@@ -49,6 +54,12 @@ export class DesignSystemComponent {
   );
 
   selectedTab = signal<string>('buttons');
+
+  // Tickets showcase tab state
+  readonly dsIncidentExpanded = signal<boolean>(true);
+  readonly dsRequestExpanded = signal<boolean>(false);
+  readonly dsChangeExpanded = signal<boolean>(false);
+  readonly dsActiveFilter = signal<string>('all');
 
   cities = [
     { id: 1, name: 'New York' },
